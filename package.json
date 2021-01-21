@@ -17,5 +17,9 @@
    },
    "scripts": {
       "start": "ts-node src/index.ts"
-   }
+   },
+   "engines": {
+      "node": ">=14.15.4",
+      "yarn": ">=1.22.5"
+    }
 }
