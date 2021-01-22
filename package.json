@@ -16,7 +16,10 @@
       "typeorm": "0.2.30"
    },
    "scripts": {
-      "start": "ts-node src/index.ts"
+      "start": "ts-node src/index.ts",
+      "dc:up": "docker-compose up --build -d",
+      "dc:down": "docker-compose down",
+      "dc:stop": "docker-compose stop"
    },
    "engines": {
       "node": ">=14.15.4",
