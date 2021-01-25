@@ -1,0 +1,31 @@
+clone:
+  depth: full
+pipelines:
+  default:
+    - step:
+        name: Build and Test
+        image: node:12.18.3
+        caches:
+          - node
+        script:
+          - npm install
+          - npm run test:dev
+          - npm run build
+  branches:
+    master:
+      - step:
+          name: Build and Test
+          image: node:12.18.3
+          caches:
+            - node
+          script:
+            - apt-get update -y
+            - apt-get install -y ssh
+            - npm install
+            # - npm run test:dev
+            - npm run build
+      - step:
+          name: Publish Prod
+          deployment: production
+          script:
+            - git push ssh://git@kamino.deploy.umbler.com:9922/kwz2gy4k/bten-co.git master -f

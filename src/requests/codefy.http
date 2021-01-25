@@ -1,0 +1,2 @@
+### SHORTIFY
+GET http://localhost:3000/codefy?url=https://www.youtube.com/watch?v=c868lF2KWZE&ab_channel=SharkTankBrasil

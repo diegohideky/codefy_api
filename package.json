@@ -1,28 +1,62 @@
 {
-   "name": "kutlly_api",
-   "version": "0.0.1",
-   "description": "Awesome project developed with TypeORM.",
-   "devDependencies": {
-      "@types/express": "^4.17.11",
-      "@types/node": "^8.0.29",
-      "ts-node": "3.3.0",
-      "typescript": "3.3.3333"
-   },
-   "dependencies": {
-      "body-parser": "^1.18.1",
-      "express": "^4.15.4",
-      "pg": "^8.4.0",
-      "reflect-metadata": "^0.1.10",
-      "typeorm": "0.2.30"
-   },
-   "scripts": {
-      "start": "ts-node src/index.ts",
-      "dc:up": "docker-compose up --build -d",
-      "dc:down": "docker-compose down",
-      "dc:stop": "docker-compose stop"
-   },
-   "engines": {
-      "node": ">=14.15.4",
-      "yarn": ">=1.22.5"
-    }
+  "name": "api-codefy-bten",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "dc:up": "docker-compose up --build -d",
+    "dc:down": "docker-compose down",
+    "dc:stop": "docker-compose stop",
+    "dev": "concurrently \"npm run build:watch\" \"npm run start:watch\"",
+    "start": "node dist/server.js",
+    "start:watch": "nodemon --delay 1 dist/server.js",
+    "start:direct": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/scripts/fix-refresh-tokens.ts",
+    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
+    "build:watch": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored --watch",
+    "migrate": "typeorm migration:create",
+    "postinstall": "yarn build",
+    "test": "jest"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/node": "^7.10.5",
+    "@babel/plugin-proposal-decorators": "^7.10.5",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/jest": "^26.0.14",
+    "@types/node": "^14.11.2",
+    "@typescript-eslint/eslint-plugin": "^4.2.0",
+    "@typescript-eslint/parser": "^4.2.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-import-resolver-typescript": "^2.3.0",
+    "eslint-plugin-import": "^2.22.0",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.4.0",
+    "ts-node": "^9.0.0",
+    "ts-node-dev": "^1.0.0-pre.63",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^4.0.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.3.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.7",
+    "pg": "^8.3.3",
+    "reflect-metadata": "^0.1.13",
+    "shortid": "^2.2.15",
+    "typeorm": "^0.2.26",
+    "valid-url": "^1.0.9"
+  },
+  "engines": {
+    "node": ">=14.15.4",
+    "yarn": ">=1.22.5"
+  }
 }
