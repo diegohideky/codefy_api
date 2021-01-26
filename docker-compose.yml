@@ -1,17 +1,25 @@
-version: '3'
-
+version: '3.0'
 services:
-  mysql:
-    container_name: mysql
-    image: mysql:5.7
+  postgres:
+    image: postgres:11.4
+    container_name: codefy_postgres_service
     environment:
-      MYSQL_USER: "root"
-      MYSQL_ROOT_PASSWORD: "root"
-      MYSQL_DATABASE: "wp_bten"
-    ports:
-      - "3306:3306"
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      PGDATA: /data/postgres
     volumes:
-      - mysql:/var/lib/mysql
+      - postgres:/data/postgres
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"
+    networks:
+      - codefy-network
     restart: unless-stopped
+
 volumes:
-  mysql:
+  postgres:
+
+networks:
+  codefy-network:
+    driver: bridge
